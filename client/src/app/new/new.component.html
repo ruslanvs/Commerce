@@ -1,0 +1,53 @@
+<h2>New Product</h2>
+
+<form (submit) = "create()" #form_data="ngForm">
+  <p>{{ new_product | json }}</p>
+  <input
+    type="text"
+    name="name"
+    required
+    [(minlength)]="lim.minlength"
+    [(ngModel)]="new_product.name"
+    #name="ngModel"
+    placeholder="name"
+  />*
+  <a *ngIf="name.touched && name.invalid" class="error">
+    <a *ngIf="name.errors.required">Error: name must be filled out.</a>
+    <a *ngIf="name.errors.minlength">Error: name must have at least {{ name.errors.minlength.requiredLength | json }} characters.</a>
+  </a>
+  <a *ngIf="errors.name" class="error">{{ errors.name.message }}</a>
+  <br>
+  
+  <input
+    type="number"
+    name="quantity"
+    required
+    [(ngModel)]="new_product.quantity"
+    #quantity="ngModel"
+    placeholder="quantity"
+  />*
+  <a *ngIf="quantity.touched && quantity.invalid" class="error">
+    <a *ngIf="quantity.errors.required">Error: quantity must be filled out.</a>
+  </a>
+  <a *ngIf="errors.quantity" class="error">{{ errors.quantity.message }}</a>
+  <br>
+
+  <input
+    type="number"
+    name="price"
+    required
+    [(ngModel)]="new_product.price"
+    #price="ngModel"
+    placeholder="price"
+  />*
+  <a *ngIf="price.touched && price.invalid" class="error">
+    <a *ngIf="price.errors.required">Error: price must be filled out.</a>
+  </a>
+  <a *ngIf="errors.price" class="error">{{ errors.price.message }}</a>
+  <br>
+
+  <input type="submit" [disabled]="form_data.status == 'INVALID'" value="Add Product"/>
+</form>
+<button (click) = "home()">Cancel</button>
+
+<p>* required fields</p>

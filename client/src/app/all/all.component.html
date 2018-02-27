@@ -1,0 +1,9 @@
+<hr>
+<div *ngFor="let product of all.data">
+  <p>Id: {{ product._id }} | Name: {{ product.name }} | Quantity: {{ product.quantity }} | Price: {{ product.price }}</p>
+
+  <button (click) = "details( product._id )">Details</button>
+  <button (click) = "edit( product._id )">Edit</button>
+  <button (click) = "delete( product._id )" [disabled]="product.quantity > 0">Delete</button>
+  <hr>
+</div>

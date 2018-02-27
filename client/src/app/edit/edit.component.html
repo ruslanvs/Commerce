@@ -1,0 +1,54 @@
+<h2>Update Product</h2>
+
+<form (submit) = "update( one )" #form_data="ngForm">
+
+  <input
+    type="text"
+    name="name"
+    required
+    [(minlength)]="lim.minlength"
+    [(ngModel)] = "one.name"
+    #name="ngModel"
+    placeholder = "name"
+  />*
+  <a *ngIf="name.touched && name.invalid" class="error">
+    <a *ngIf="name.errors.required">Error: name must be filled out.</a>
+    <a *ngIf="name.errors.minlength">Error: name should have at least {{ name.errors.minlength.requiredLength | json }} characters.</a>
+  </a>
+  <a *ngIf="errors" class="error">{{ errors.name }}</a>
+  <br>
+
+  <input
+    type="number"
+    name="quantity"
+    required
+    [(ngModel)]="one.quantity"
+    #quantity="ngModel"
+    placeholder="quantity"
+  />*
+  <a *ngIf="quantity.touched && quantity.invalid" class="error">
+    <a *ngIf="quantity.errors.required">Error: quantity must be filled out.</a>
+  </a>
+  <a *ngIf="errors.quantity" class="error">{{ errors.quantity.message }}</a>
+  <br>
+
+  <input
+    type="number"
+    name="price"
+    required
+    [(ngModel)]="one.price"
+    #price="ngModel"
+    placeholder="price"
+  />*
+  <a *ngIf="price.touched && price.invalid" class="error">
+    <a *ngIf="price.errors.required">Error: price must be filled out.</a>
+  </a>
+  <a *ngIf="errors.price" class="error">{{ errors.price.message }}</a>
+  <br>
+
+  <input type="submit" [disabled]="form_data.status == 'INVALID'" value="Update"/>
+</form>
+<button (click) = "get_one( one._id )">Reset</button>
+<button (click) = "details( one._id )">Cancel</button>
+
+<p>* required fields</p>

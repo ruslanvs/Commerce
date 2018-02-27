@@ -1,0 +1,10 @@
+<h2>Product Details</h2>
+
+<p>Name {{ one.name }}</p>
+<p>Qty: {{ one.quantity }}</p>
+<p>Price: {{ one.price }}</p>
+
+
+<button (click) = "delete_one( one._id )" [disabled]="one.quantity > 0">Delete</button>
+<button (click) = "edit( one._id )">Edit</button>
+<button (click) = "home()">Home</button>
